@@ -2,71 +2,19 @@ package com.iu.home.util;
 
 public class Pager
 {
-	// 시작번호
+	private Long page;
+	private Long perPage = 10L;
 	private Long startRow;
 
-	// 끝번호
-	private Long lastRow;
-	private Long reviewNum;
-
-	// 현재페이지
-	private Long page;
-
-	// perPage : 한페이지에(JSP) 출력할 글의 갯수
-	private Long perPage;
-
-	private Long totalPage;
-
-	// 전체 페이지 갯수 계산
-	public void makePage(Long totalCount)
+	public void makeRow()
 	{
-		this.totalPage = totalCount / this.getPerPage();
-		if (totalCount % this.getPerPage() != 0)
-		{
-			this.totalPage++;
-		}
-
-		// 전체 페이지 = totalCount 나누기 (perPage : 한페이지에(JSP) 출력할 글의 갯수)
-		// 만약 totalCount와 JSP에 출력할 글의 갯수의 나누기값 나머지가 0 이 아니라면
-		// 전체 페이지를 증가시켜라.
+		this.startRow = (this.getPage() - 1) * perPage;
 
 	}
 
-	// startRow
-	public void getRowNum()
+	public void setPage(Long page)
 	{
-		startRow = (this.getPage() - 1) * this.getPerPage() + 1;
-		lastRow = this.getPage() * this.getPerPage();
-	}
-
-	public Long getStratRow()
-	{
-		return startRow;
-	}
-
-	public void setStratRow(Long stratRow)
-	{
-		this.startRow = stratRow;
-	}
-
-	public Long getLastRow()
-	{
-		return lastRow;
-	}
-
-	public void setLastRow(Long lastRow)
-	{
-		this.lastRow = lastRow;
-	}
-
-	public Long getReviewNum()
-	{
-		return reviewNum;
-	}
-
-	public void setReviewNum(Long reviewNum)
-	{
-		this.reviewNum = reviewNum;
+		this.page = page;
 	}
 
 	public Long getPage()
@@ -75,20 +23,11 @@ public class Pager
 		{
 			this.page = 1L;
 		}
-		return page;
-	}
-
-	public void setPage(Long page)
-	{
-		this.page = page;
+		return this.page;
 	}
 
 	public Long getPerPage()
 	{
-		if (this.perPage == null || this.perPage < 1)
-		{
-			this.perPage = 5L;
-		}
 		return perPage;
 	}
 
@@ -97,14 +36,10 @@ public class Pager
 		this.perPage = perPage;
 	}
 
-	public Long getTotalPage()
+	public Long getStartRow()
 	{
-		return totalPage;
+		return startRow;
 	}
 
-	public void setTotalPage(Long totalPage)
-	{
-		this.totalPage = totalPage;
-	}
 
 }

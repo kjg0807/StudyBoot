@@ -7,8 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.iu.home.util.Pager;
 
 @Controller
 @RequestMapping(value = "/qna/*")
@@ -16,30 +21,43 @@ public class QnaController
 {
 	@Autowired
 	private QnaMapper qnaMapper;
-//	@Autowired
-//	private QnaService qnaService;
+	@Autowired
+	private QnaService qnaService;
 
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping(value = "list")
-	public ModelAndView list(QnaVO qnaVO) throws Exception
+	public ModelAndView list(Pager pager) throws Exception
 	{
 		log.info("GET LIST");
-		
+
 		ModelAndView mv = new ModelAndView();
-		List<QnaVO> ar = qnaMapper.getList();
-//		
-//		
-//		for(QnaVO qnaVO1 : ar) {
-////			System.out.println(qnaVO1.getNum());
-////			log.info(qnaVO1.getTitle());
-////			log.info(qnaVO1.getWriter());
-//		}
-//		
+		List<QnaVO> ar = qnaService.getList(pager);
+
 		mv.addObject("list", ar);
-//		mv.addObject("pager", pager);
+		mv.addObject("pager", pager);
 		mv.setViewName("qna/list");
 
 		return mv;
+	}
+
+	@GetMapping(value = "write")
+	public String write() throws Exception
+	{
+		log.info("GET WRITE");
+
+		return "qna/write";
+	}
+
+	@PostMapping(value = "write")
+	public String write(QnaVO qnaVO, RedirectAttributes redirectAttributes) throws Exception
+	{
+		log.info("POST WRITE");
+
+		int rs = qnaService.setAddList(qnaVO);
+
+		redirectAttributes.addAttribute("rs", rs);
+
+		return "redirect:./list";
 	}
 }

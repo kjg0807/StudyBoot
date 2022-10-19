@@ -3,18 +3,15 @@
 
 <mapper namespace="com.iu.home.board.qna.QnaMapper">
 	<select id="getList" resultType="QnaVO" parameterType="Pager">
-		<!-- SELECT * FROM qna order by num desc -->
-		select *
-		from qna
-		order by num desc
+		SELECT *
+		FROM qna
+		ORDER BY num DESC
 		limit #{startRow}, #{perPage}
 	</select>
 
 	<insert id="setAddList" parameterType="QnaVO">
-		INSERT into qna
-		values(null, #{writer}, #{title}, #{contents} ,#{hit}, now(),
-		#{ref},
-		#{step}, #{depth})
+		INSERT into qna(num, writer, title, contents, hit, regDate)
+		values(null, #{writer}, #{title}, #{contents} ,1, now())
 	</insert>
 
 </mapper>
