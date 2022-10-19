@@ -8,6 +8,16 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"></c:import>
 </head>
+<style>
+a:hover {
+	color: red;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+</style>
 <body>
 	<section class="container-fluid col-lg-6 mt-5">
 		<h1 style="text-align: center;">Qna List Page</h1>
@@ -23,7 +33,9 @@
 				<c:forEach items="${list }" var="list">
 					<tr>
 						<td>${list.num }</td>
-						<td>${list.title }</td>
+						<td>
+							<a href="./detail?num=${list.num}">${list.title}</a>
+						</td>
 						<td>${list.writer }</td>
 						<td>${list.contents }</td>
 						<td>${list.hit }</td>

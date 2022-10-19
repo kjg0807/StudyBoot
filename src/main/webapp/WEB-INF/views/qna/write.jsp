@@ -44,7 +44,7 @@
 		</form>
 	</section>
 </body>
-<script>
+<!-- <script>
 	let rs = '${param.rs}';
 	if (rs != '') {
 		if (rs == '1') {
@@ -53,5 +53,5 @@
 			alert("등록 실패");
 		}
 	}
-</script>
+</script> -->
 </html>

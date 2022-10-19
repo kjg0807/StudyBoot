@@ -9,7 +9,6 @@ public class Pager
 	public void makeRow()
 	{
 		this.startRow = (this.getPage() - 1) * perPage;
-
 	}
 
 	public void setPage(Long page)

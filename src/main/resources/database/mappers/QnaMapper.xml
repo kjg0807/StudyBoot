@@ -9,9 +9,26 @@
 		limit #{startRow}, #{perPage}
 	</select>
 
-	<insert id="setAddList" parameterType="QnaVO">
-		INSERT into qna(num, writer, title, contents, hit, regDate)
-		values(null, #{writer}, #{title}, #{contents} ,1, now())
+	<insert id="setAddList" parameterType="QnaVO"
+		useGeneratedKeys="true" keyProperty="num">
+		INSERT into qna(num,
+		writer, title,
+		contents, hit, regDate)
+		values(null, #{writer},
+		#{title}, #{contents}
+		,1, now())
 	</insert>
+
+	<insert id="setFileAdd" parameterType="QnaFileVO">
+		insert into qnaFiles
+		values(null, #{num}, #{fileName}, #{oriName})
+	</insert>
+
+	<select id="getDetail" resultType="QnaVO">
+		select *
+		from qna where num = #{num}
+		<!-- select * from qna q inner join qnaFiles qf on q.num = qf.num where 
+			q.num = #{num}; -->
+	</select>
 
 </mapper>
