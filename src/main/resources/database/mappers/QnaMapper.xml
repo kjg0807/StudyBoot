@@ -24,11 +24,30 @@
 		values(null, #{num}, #{fileName}, #{oriName})
 	</insert>
 
-	<select id="getDetail" resultType="QnaVO">
+	<select id="getDetail" parameterType="QnaVO"
+		resultMap="fileDetail">
+		<!-- select * from qna where num = #{num} -->
 		select *
-		from qna where num = #{num}
-		<!-- select * from qna q inner join qnaFiles qf on q.num = qf.num where 
-			q.num = #{num}; -->
+		from qna q
+		inner join
+		qnaFiles qf
+		on q.num = qf.num
+		where q.num =
+		#{num}
 	</select>
+	<resultMap type="QnaVO" id="fileDetail">
+		<id column="num" property="num" />
+		<result column="writer" property="writer" />
+		<result column="title" property="title" />
+		<result column="contents" property="contents" />
+		<result column="hit" property="hit" />
+		<collection property="qnaFileVOs" javaType="List"
+			ofType="QnaFileVO">
+			<id column="fileNum" property="fileNum" />
+			<result column="num" property="num" />
+			<result column="fileName" property="fileName" />
+			<result column="oriName" property="oriName" />
+		</collection>
+	</resultMap>
 
 </mapper>

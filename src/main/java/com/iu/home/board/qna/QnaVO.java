@@ -1,8 +1,10 @@
 package com.iu.home.board.qna;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+
 
 public class QnaVO
 {
@@ -15,7 +17,8 @@ public class QnaVO
 	private Long ref;
 	private Long step;
 	private Long depth;
-	
+	private List<QnaFileVO> qnaFileVOs;
+
 	private MultipartFile[] files;
 
 	public MultipartFile[] getFiles()
@@ -26,6 +29,16 @@ public class QnaVO
 	public void setFiles(MultipartFile[] files)
 	{
 		this.files = files;
+	}
+
+	public List<QnaFileVO> getQnaFileVOs()
+	{
+		return qnaFileVOs;
+	}
+
+	public void setQnaFileVOs(List<QnaFileVO> qnaFileVOs)
+	{
+		this.qnaFileVOs = qnaFileVOs;
 	}
 
 	public Long getNum()

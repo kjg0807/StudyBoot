@@ -19,7 +19,7 @@ a {
 }
 </style>
 <body>
-	<section class="container-fluid col-lg-6 mt-5">
+	<section class="container-fluid col-lg-6 mt-5" style="text-align: center;">
 		<h1 style="text-align: center;">Qna List Page</h1>
 		<div>
 			<table class="table table-hover">
