@@ -30,7 +30,7 @@
 					<td>${detail.hit }</td>
 					<c:forEach items="${detail.qnaFileVOs }" var="dto">
 						<td>
-							<img style="width: 250px; height: 200px;" src="/file/${dto.fileName }">
+							<img style="width: 250px; height: 200px;" src="/file/app/upload/qna${dto.fileName }">
 							<%-- src="/file/qna/${dto.fileName }" --%>
 						</td>
 					</c:forEach>
