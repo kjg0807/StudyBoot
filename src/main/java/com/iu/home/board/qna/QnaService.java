@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.home.util.FileManager;
@@ -20,6 +21,7 @@ import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Transactional(rollbackFor = Exception.class) // 실행하다 Exception 발생시 롤백
 public class QnaService
 {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -47,11 +49,15 @@ public class QnaService
 		if (!file.exists())
 		{
 			boolean ch = file.mkdirs();
-			log.info("Check: {}", ch);
 		}
 
 		for (MultipartFile f : qnaVO.getFiles())
 		{
+			// if (f.isEmpty())
+			// {
+			// log.info("----- Occur Exception -----");
+			// throw new Exception(); // Exception 강제 발생
+			// }
 			// isEmpty : 비어있는지
 			if (!f.isEmpty())
 			{

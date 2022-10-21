@@ -13,8 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional
 class QnaMapperTest
 {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -54,28 +57,29 @@ class QnaMapperTest
 	// log.info("Test2 case");
 	// }
 
-//	@Test
-//	void setAddList() throws Exception
-//	{
-//		QnaVO qnaVO = new QnaVO();
-//
-//		for (int i = 0; i < 100; i++)
-//		{
-//			qnaVO.setWriter("Test writer");
-//			qnaVO.setTitle("Test title");
-//			qnaVO.setContents("Test Contents");
-//			qnaVO.setHit(1L);
-//			qnaVO.setRegDate(null);
-//			qnaVO.setRef(12L);
-//			qnaVO.setStep(123L);
-//			qnaVO.setDepth(1234L);
-//
-//			int ar = qnaMapper.setAddList(qnaVO);
-//
-//			// assertNotEquals(0, ar);
-//		}
-//
-//	}
+	@Test
+	@Rollback(false)
+	void setAddList() throws Exception
+	{
+		QnaVO qnaVO = new QnaVO();
+
+		for (int i = 0; i < 5; i++)
+		{
+			qnaVO.setWriter("Test writer" + i);
+			qnaVO.setTitle("Test title" + i);
+			qnaVO.setContents("Test Contents" + i);
+			qnaVO.setHit(1L);
+			qnaVO.setRegDate(null);
+			qnaVO.setRef(12L);
+			qnaVO.setStep(123L);
+			qnaVO.setDepth(1234L);
+
+			int ar = qnaMapper.setAddList(qnaVO);
+
+			// assertNotEquals(0, ar);
+		}
+
+	}
 
 	// @Test
 	// void test() throws Exception

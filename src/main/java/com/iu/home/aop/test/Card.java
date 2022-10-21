@@ -28,9 +28,8 @@ public class Card
 		log.info("----- After -----");
 	}
 
-	// com.iu.home.aop.test 패키지 안에 Transport 클래스안에 get으로 시작하는 모든 메서드
+	// com.iu.home.aop.test 패키지 안에 Transport 클래스안에 take으로 시작하는 모든 메서드
 	// afterthrowing - 예외가 발생했을 때
-	// com.iu.home.board 패키지 밑에 있는 것에서 메서드가 set으로 시작하는 모든 것
 	// * | com.iu.home.board.*|.*.|set*())"
 	// 모든 리턴타입 | 패키지명(com.iu.home.board.*) | 모든 클래스 | set으로 시작하는 모든 메서드
 	@Around(value = "execution(* com.iu.home.aop.test.Transport.take*())")
