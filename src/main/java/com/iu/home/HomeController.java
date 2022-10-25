@@ -23,9 +23,6 @@ public class HomeController
 	// LoggerFactory.getLogger(HomeController.class);
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private QnaMapper qnaMapper;
-
 	@GetMapping("/")
 	public String home() throws Exception
 	{

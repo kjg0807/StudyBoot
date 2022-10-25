@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iu.home.member.MemberMapper">
+
+	<select id="getLogin" parameterType="MemberVO"
+		resultMap="loginInfo">
+		select *
+		from member m
+		left join
+		member_role mr
+		on m.id = mr.id
+		left join
+		role r
+		on mr.num = r.num
+		where m.id=#{id} and m.pwd=#{pwd}
+	</select>
+	<resultMap type="MemberVO" id="loginInfo">
+		<id column="num" property="num" />
+		<result column="id" property="id" />
+		<result column="pwd" property="pwd" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="enabled" property="enabled" />
+		<collection property="roleVO" javaType="String">
+			<id column="num" property="num" />
+			<result column="roleName" property="roleName" />
+		</collection>
+	</resultMap>
+
+	<insert id="setJoin" parameterType="MemberVO">
+		insert into member(id, pwd,
+		name, email)
+		values(#{id}, #{pwd}, #{name}, #{email})
+	</insert>
+	<insert id="setRole" parameterType="RoleVO">
+		INSERT INTO MEMBER_ROLE
+		VALUES(#{id},
+		(SELECT * FROM ROLE WHERE num = 3)
+		)
+	</insert>
+
+</mapper>

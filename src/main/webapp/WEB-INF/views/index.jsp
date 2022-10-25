@@ -12,18 +12,33 @@
 <body>
 	<div style="text-align: center;">
 		<h1>Index page</h1>
+		<c:if test="${member!=null }">
+			<h2>${member.name }님안녕하세요!</h2>
+		</c:if>
 		<img src="/images/111.jpg" style="width: 50%; height: 50%;" id="id1">
 		<br>
 		<br>
 		<a href="./qna/list" class="btn btn-outline-dark">QNA List</a>
+		<c:choose>
+			<c:when test="${member==null }">
+				<a href="./member/login" class="btn btn-outline-dark">login</a>
+				<a href="./member/join" class="btn btn-outline-dark">Sign Up</a>
+			</c:when>
+			<c:otherwise>
+				<a href="./member/logout" class="btn btn-outline-dark">logout</a>
+			</c:otherwise>
+		</c:choose>
+
 		<br>
 		<br>
-		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG" style="width: 50%; height: 50%;">
-		<img src="/file/notice/복숭아꽃.jpg" style="width: 50%; height: 50%;">
+		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG"
+			style="width: 50%; height: 50%;"> <img
+			src="/file/notice/복숭아꽃.jpg" style="width: 50%; height: 50%;">
 		<br>
 		<br>
-		<a href="/fileDown/qna?fileNum=2" class="btn btn-outline-dark">Qna Download</a>
-		<a href="/fileDown/notice?fileNum=2" class="btn btn-outline-dark">Notice Download</a>
+		<a href="/fileDown/qna?fileNum=2" class="btn btn-outline-dark">Qna
+			Download</a> <a href="/fileDown/notice?fileNum=2"
+			class="btn btn-outline-dark">Notice Download</a>
 		<br>
 		<br>
 	</div>
