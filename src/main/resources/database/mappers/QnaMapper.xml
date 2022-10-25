@@ -41,6 +41,7 @@
 		<result column="title" property="title" />
 		<result column="contents" property="contents" />
 		<result column="hit" property="hit" />
+		<result column="regDate" property="regDate" />
 		<collection property="qnaFileVOs" javaType="List"
 			ofType="QnaFileVO">
 			<id column="fileNum" property="fileNum" />
