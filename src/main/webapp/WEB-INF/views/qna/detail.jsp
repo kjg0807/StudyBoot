@@ -36,10 +36,11 @@
 						<td>
 							<img style="width: 250px; height: 200px;"
 								src="/file/qna/${dto.fileName }">
-							<%-- src="/file/qna/${dto.fileName }" --%>
 						</td>
 						<td>
-							<a class="btn btn-outline-dark" href="/fileDown/qna?fileNum=${dto.fileNum }">Picture Download</a>
+							<a class="btn btn-outline-dark"
+								href="/fileDown/qna?fileNum=${dto.fileNum }">Picture
+								Download</a>
 						</td>
 					</c:forEach>
 				</tr>
