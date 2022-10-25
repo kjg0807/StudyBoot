@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +24,9 @@ import com.iu.home.board.qna.QnaFileVO;
 @Component
 public class FileManager extends AbstractView
 {
+	@Value("${app.download.base}")
+	private String base;
+	
 	@Override // 다운로드 걸어주는 메서드
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
@@ -33,7 +37,7 @@ public class FileManager extends AbstractView
 		log.info("------------------------------------------------------");
 		log.info("FILEVO: {}", qnaFileVO);
 
-		File file = new File("D:/GDRS/upload/" + path, qnaFileVO.getFileName());
+		File file = new File(base + path, qnaFileVO.getFileName());
 
 		// 한글 처리
 		response.setCharacterEncoding("UTF-8");

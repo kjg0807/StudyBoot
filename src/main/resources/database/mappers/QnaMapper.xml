@@ -51,4 +51,16 @@
 		</collection>
 	</resultMap>
 
+	<select id="getFileDetail" parameterType="QnaFileVO"
+		resultMap="DownFile">
+		select * from qnaFiles where filenum = ${fileNum}
+	</select>
+
+	<resultMap type="QnaFileVO" id="DownFile">
+		<id column="fileNum" property="fileNum" />
+		<result column="num" property="num" />
+		<result column="fileName" property="fileName" />
+		<result column="oriName" property="oriName" />
+	</resultMap>
+
 </mapper>

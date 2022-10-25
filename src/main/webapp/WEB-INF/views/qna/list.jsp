@@ -19,7 +19,7 @@ a {
 }
 </style>
 <body>
-	<section class="container-fluid col-lg-6 mt-5" style="text-align: center;">
+	<section class="container-fluid col-lg-10 mt-5" style="text-align: center;">
 		<h1 style="text-align: center;">Qna List Page</h1>
 		<div>
 			<table class="table table-hover">
@@ -29,6 +29,7 @@ a {
 					<td>Writer</td>
 					<td>Contents</td>
 					<td>Hit</td>
+					<td>Date</td>
 				</tr>
 				<c:forEach items="${list }" var="list">
 					<tr>
@@ -39,6 +40,7 @@ a {
 						<td>${list.writer }</td>
 						<td>${list.contents }</td>
 						<td>${list.hit }</td>
+						<td>${list.regDate }</td>
 					</tr>
 				</c:forEach>
 			</table>
