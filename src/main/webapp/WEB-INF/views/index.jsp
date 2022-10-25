@@ -18,8 +18,8 @@
 		<a href="./qna/list" class="btn btn-outline-dark">QNA List</a>
 		<br>
 		<br>
-		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG">
-		<img src="/file/notice/복숭아꽃.jpg">
+		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG" style="width: 50%; height: 50%;">
+		<img src="/file/notice/복숭아꽃.jpg" style="width: 50%; height: 50%;">
 		<br>
 		<br>
 		<a href="/fileDown/qna?fileNum=2" class="btn btn-outline-dark">Qna Download</a>
