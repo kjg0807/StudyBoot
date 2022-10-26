@@ -10,4 +10,6 @@ public interface MemberMapper
 	public int setJoin(MemberVO memberVO) throws Exception;
 	
 	public int setRole(RoleVO roleVO) throws Exception;
+	
+	public int getCheckId(String memberVO) throws Exception;
 }

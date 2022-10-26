@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
@@ -89,5 +90,17 @@ public class MemberController
 		mv.setViewName("redirect:./login");
 
 		return mv;
+	}
+
+	@RequestMapping(value = "getIdCheck")
+	@ResponseBody
+	public int getIdCheck(String memberVO) throws Exception
+	{
+		log.info("===== Id Check =====");
+
+		int rs = memberService.getCheckId(memberVO);
+		log.info("--- rs: {} ---", rs);
+
+		return rs;
 	}
 }

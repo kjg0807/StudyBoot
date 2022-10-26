@@ -10,3 +10,4 @@
 	integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
 	crossorigin="anonymous"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

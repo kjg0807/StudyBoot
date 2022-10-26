@@ -1,69 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../temp/boot.jsp"></c:import>
+<script defer src="/js/util.js"></script>
+<script defer src="/js/memberAdd.js"></script>
 </head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-	crossorigin="anonymous"></script>
 <body>
-	<form action="../member/join" method="POST" id="frm" name="myform">
-		<br>
-		<h1 style="text-align: center;">회원 가입</h1>
-		<section class="col-lg-6 container-fluid mt-4">
-				<!-- id -->
-				<div class="mb-3">
-					<label class="form-label">아이디</label>
-					<input type="text" class="form-control" name="id"
-						placeholder="아이디 입력" onfocus="this.placeholder=''"
-						onblur="this.placeholder='아이디 입력'" id="id">
+	<form action="./add" id="joinForm" method="post">
+		<section class="col-lg-6 container-fluid mt-4"
+			style="text-align: center;">
+			<h1>회원 가입</h1>
+			<br>
+			<div class="row">
+				<div class="row mb-3">
+					<label for="inputUserName" class="col-sm-2 col-form-label">ID</label>
+					<div class="col-sm-10">
+						<input type="text" name="id" class="form-control" id="inputId"
+							placeholder="ID 입력">
+						<div id="inputIdResult"></div>
+						<div>
+							<font id="id_feedback" size="3"></font>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" name="password" class="form-control"
+							id="inputPw" placeholder="Password 입력">
+						<div id="inputPwResult"></div>
+					</div>
 				</div>
 
-				<!-- password 1 -->
-				<div class="mb-3">
-					<label class="form-label">비밀번호</label>
-					<input type="password" class="form-control" name="pwd"
-						placeholder="비밀번호 입력" id="pwd" onfocus="this.placeholder=''"
-						onblur="this.placeholder='비밀번호 입력'" autocomplete="off">
-					<!-- pwd를 입력할 때마다 (1글자씩) 메세지를 출력 : pwd - 최소 6글자 이상 -->
-					<div id="pwdText" style="display: none; color: #dc3545;">6글자
-						이상 16글자 이하로 입력해야 합니다.</div>
-				</div>
-				<!-- name -->
-				<div class="mb-3">
-					<label class="form-label">이름</label>
-					<input type="text" class="form-control" name="name"
-						placeholder="이름 입력" onfocus="this.placeholder=''"
-						onblur="this.placeholder='이름 입력'" id="name">
-				</div>
-				<!-- email -->
-				<div class="mb-7">
-					<label class="form-label">이메일</label>
-					<div>
-						<input name="email" id="email" type="text" placeholder="이메일 입력"
-							class="form-control" onfocus="this.placeholder=''"
-							onblur="this.placeholder='이메일 입력'">
-					</div>
-					<br>
-					<div style="text-align: center;">
-						<button type="submit" id="btn1" class="btn btn-outline-dark">회원
-							가입</button>
-						<button type="reset" class="btn btn-outline-dark">초기화</button>
-						<a href="../" class="btn btn-outline-dark log">home</a>
+				<div class="row mb-3">
+					<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-10">
+						<input type="password" name="pw" class="form-control"
+							id="inputPwCheck" placeholder="Password 입력">
+						<div id="inputPwCheckResult"></div>
 					</div>
 				</div>
+
+				<div class="row mb-3">
+					<label for="inputName" class="col-sm-2 col-form-label">Name</label>
+					<div class="col-sm-10">
+						<input type="text" name="name" class="form-control" id="inputName"
+							placeholder="이름 입력">
+						<div id="inputNameResult"></div>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+					<div class="col-sm-10">
+						<input type="email" required name="email" class="form-control"
+							id="inputEmail" placeholder="Email 입력">
+						<div id="inputEmailResult"></div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
+					<div class="col-sm-10">
+						<input type="text" name="phone" class="form-control"
+							id="inputPhone" placeholder="전화번호 입력">
+						<div></div>
+					</div>
+				</div>
+
+				<div class="row mb-3">
+					<label for="files" class="col-sm-2 col-form-label">Photo</label>
+					<div class="col-sm-10">
+						<input type="file" name="photo" class="form-control" id="files"
+							placeholder="전화번호 입력">
+					</div>
+				</div>
+				<div class="mb-3" style="text-align: center;">
+					<a href="../" class="btn btn-outline-dark log">home</a>
+					<button type="button" id="joinButton" class="btn btn-outline-dark">Sign
+						in</button>
+				</div>
+			</div>
 		</section>
-		<br>
-		<br>
 	</form>
+	<!-- 약관 test-->
+	<div style="text-align: center;">
+		<div>
+			ALL <input type="checkbox" id="all">
+		</div>
+		<br>
+		<div>
+			동의1 <input type="checkbox" class="check" name="" id="">
+			<div>약관1</div>
+		</div>
+		<br>
+		<div>
+			동의2 <input type="checkbox" class="check" name="" id="">
+			<div>약관2</div>
+		</div>
+		<br>
+		<div>
+			동의3 <input type="checkbox" class="check" name="" id="">
+			<div>약관3</div>
+		</div>
+	</div>
+
 </body>
 </html>

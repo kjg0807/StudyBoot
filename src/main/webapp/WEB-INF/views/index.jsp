@@ -9,11 +9,13 @@
 </head>
 <c:import url="./temp/boot.jsp"></c:import>
 <link href="/css/test.css" rel="stylesheet">
+<script defer src="/js/test.js"></script>
 <body>
 	<div style="text-align: center;">
 		<h1>Index page</h1>
 		<c:if test="${member!=null }">
 			<h2>${member.name }님안녕하세요!</h2>
+			<h4>등급: ${member.roleVO.roleName }</h4>
 		</c:if>
 		<img src="/images/111.jpg" style="width: 50%; height: 50%;" id="id1">
 		<br>
@@ -42,5 +44,14 @@
 		<br>
 		<br>
 	</div>
+	<div style="text-align: center;">
+		<button id="btn" class="btn btn-outline-dark">Click</button>
+
+		<button id="btn1" class="but btn btn-outline-dark">Btn1</button>
+		<button id="btn2" class="but btn btn-outline-dark">Btn2</button>
+		<button id="btn3" class="but btn btn-outline-dark">Btn3</button>
+	</div>
+	<br>
+	<br>
 </body>
 </html>
