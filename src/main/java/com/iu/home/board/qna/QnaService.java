@@ -82,4 +82,9 @@ public class QnaService
 	{
 		return qnaMapper.getFileDetail(qnaFileVO);
 	}
+
+	public int DeleteQnaFile(QnaFileVO qnaFileVO) throws Exception
+	{
+		return qnaMapper.DeleteQnaFile(qnaFileVO);
+	}
 }

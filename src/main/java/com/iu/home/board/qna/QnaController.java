@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +30,7 @@ public class QnaController
 
 		ModelAndView mv = new ModelAndView();
 		List<QnaVO> ar = qnaService.getList(pager);
+		log.info("list - num: {}", ar);
 
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
@@ -69,5 +71,33 @@ public class QnaController
 		mv.setViewName("qna/detail");
 
 		return mv;
+	}
+	// qna/update get - parameter: num, update.jsp
+
+	@GetMapping(value = "update")
+	public ModelAndView update(QnaVO qnaVO, Pager pager) throws Exception
+	{
+		log.info("=== Get Update ===");
+
+		ModelAndView mv = new ModelAndView();
+		qnaVO = qnaService.getDetail(qnaVO);
+		log.info("writer: {}", qnaVO.getNum());
+
+		mv.addObject("list", qnaVO);
+		mv.setViewName("qna/update");
+
+		return mv;
+	}
+
+	@ResponseBody
+	@RequestMapping("fileDelete")
+	public int fileDelete(QnaFileVO qnaFileVO) throws Exception
+	{
+		int rs = qnaService.DeleteQnaFile(qnaFileVO);
+
+		log.info("===== rs : {}=====", rs);
+		log.info("===== Filenum : {}=====", qnaFileVO.getFileNum());
+
+		return rs;
 	}
 }

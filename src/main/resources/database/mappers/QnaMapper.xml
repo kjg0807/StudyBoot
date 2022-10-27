@@ -29,7 +29,7 @@
 		<!-- select * from qna where num = #{num} -->
 		select *
 		from qna q
-		inner join
+		left join
 		qnaFiles qf
 		on q.num = qf.num
 		where q.num =
@@ -62,5 +62,16 @@
 		<result column="fileName" property="fileName" />
 		<result column="oriName" property="oriName" />
 	</resultMap>
+
+	<update id="setQnaUpdate" parameterType="QnaVO">
+		update qna set
+		title=#{title}, contents=#{contents}
+		where num = #{num}
+	</update>
+
+	<delete id="DeleteQnaFile" parameterType="QnaFileVO">
+		delete from qnaFiles
+		where fileNum=${fileNum}
+	</delete>
 
 </mapper>
