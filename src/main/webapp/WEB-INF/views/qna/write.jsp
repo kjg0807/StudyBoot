@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <c:import url="../temp/boot.jsp"></c:import>
 </head>
+<script defer src="/js/write.js"></script>
 <body>
 	<section class="container-fluid col-lg-6 mt-5">
 		<h1>Qna Write Page</h1>
@@ -27,14 +28,23 @@
 				<textarea name="contents" id="contents" class="form-control"
 					cols="20" rows="5" placeholder="내용을 입력하세요."></textarea>
 			</div>
-			<div class="mb-3">
+
+			<div class="mb-3" id="File">
+				<div class="mb-3">
+					<button type="button" id="fileAdd" class="btn btn-outline-dark">File Add</button>
+					<button type="button" id="fileDel" class="btn btn-outline-dark" style="display: none;">File Delete</button>
+					<br>
+				</div>
+			</div>
+
+			<!-- <div class="mb-3">
 				<label for="formGroupExampleInput" class="form-label">파일1</label>
 				<input type="file" class="form-control" name="files" id="files">
 			</div>
 			<div class="mb-3">
 				<label for="formGroupExampleInput" class="form-label">파일2</label>
 				<input type="file" class="form-control" name="files" id="files1">
-			</div>
+			</div> -->
 			<div style="text-align: center;">
 				<button type="submit" class="btn btn-outline-dark">Write
 					Complete</button>
