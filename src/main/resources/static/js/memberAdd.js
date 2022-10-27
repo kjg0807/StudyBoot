@@ -123,3 +123,70 @@ $("#joinButton").click(function () {
         $("#joinForm").submit();
     }
 });
+
+// ---------------------------------------------
+
+$("#test").click(function () {
+    let id = "123";
+    let name = "window";
+
+    // id:id - 앞은 파라미터 뒤는 변수명
+    $.post("./test", { id: id, name, name }, function (result) {
+        console.log("result: ", result);
+        console.log("Name: ", result.name);
+        // 값이 이상한거 들어올 때 설정
+        // result = JSON.parse(result);
+        // console.log("Name222: ", result.name);
+    })
+})
+
+$("#test2").click(function () {
+    let id = 'abbbb';
+    $.ajax({
+        type: "get",
+        url: "getIdCheck",
+        data: { id: id },
+
+        success: function (result) {
+            console.log("ajax get success- result: ", result);
+        },
+        error: function (status, error, xhr) {
+            console.log("status: ", status);
+            console.log("error: ", error);
+            console.log("xhr: ", xhr);
+        }
+    })
+})
+
+$("#test3").click(function () {
+    let id = 'hello';
+    let name = "name: yae"
+    let ar = [1, 2, 3];
+    $.ajax({
+        type: "post",
+        url: "test",
+        traditional: true, // 배열을 전송할 때 사용
+        data: { id: id, name: name, ar: ar },
+
+        success: function (result) {
+            console.log("ajax post success- result: ", result);
+        },
+        error: function (status, error, xhr) {
+            console.log("status: ", status);
+            console.log("error: ", error);
+            console.log("xhr: ", xhr);
+        }
+    })
+})
+
+let count = 3;
+$("#s1Add").click(function () {
+    // option 선택 추가
+    let add = '<option class="abc" id="abc"' + count + '">' + count + '</option>';
+    $("#s1").append(add);
+    count++;
+})
+
+$("#s1Del").click(function () {
+    $("#s1 option:last").remove();
+})

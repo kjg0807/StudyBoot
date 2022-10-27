@@ -87,6 +87,17 @@
 			</div>
 		</section>
 	</form>
+	<br>
+	<!-- Post Button-->
+	<div style="text-align: center;">
+		<button id="test" type="button" class="btn btn-outline-dark">Post
+			Test</button>
+		<button id="test2" type="button" class="btn btn-outline-dark">Ajax
+			Get Test</button>
+		<button id="test3" type="button" class="btn btn-outline-dark">Ajax
+			Post Test</button>
+	</div>
+	<br>
 	<!-- 약관 test-->
 	<div style="text-align: center;">
 		<div>
@@ -108,6 +119,15 @@
 			<div>약관3</div>
 		</div>
 	</div>
-
+	<br>
+	<div style="text-align: center;">
+		<select name="" id="s1">
+			<option value="">1</option>
+			<option value="">2</option>
+		</select>
+		<button class="btn btn-outline-dark" type="button" id="s1Add">Add</button>
+		<button class="btn btn-outline-dark" type="button" id="s1Del">Delete</button>
+	</div>
+	<br>
 </body>
 </html>

@@ -104,4 +104,18 @@ public class MemberController
 
 		return rs;
 	}
+
+	@PostMapping("test")
+	@ResponseBody
+	public MemberVO setTest(MemberVO memberVO, String [] ar) throws Exception
+	{
+		log.info("==================================");
+		log.info("ID: {}", memberVO.getId());
+		log.info("Name: {}", memberVO.getName());
+		for(String s : ar) {
+			log.info("ar: {}", s);
+		}
+		
+		return memberVO;
+	}
 }
