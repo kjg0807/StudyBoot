@@ -19,7 +19,7 @@ public class MemberService
 		return memberMapper.setJoin(memberVO);
 	}
 
-	public int getCheckId(String memberVO) throws Exception
+	public int getCheckId(MemberVO memberVO) throws Exception
 	{
 		return memberMapper.getCheckId(memberVO);
 	}

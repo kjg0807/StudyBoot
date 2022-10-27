@@ -44,7 +44,7 @@
 	<select id="getCheckId" parameterType="MemberVO"
 		resultType="int">
 		select
-		count(*) from
+		count(id) from
 		member where id = #{id}
 	</select>
 

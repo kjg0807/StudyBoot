@@ -11,5 +11,5 @@ public interface MemberMapper
 	
 	public int setRole(RoleVO roleVO) throws Exception;
 	
-	public int getCheckId(String memberVO) throws Exception;
+	public int getCheckId(MemberVO memberVO) throws Exception;
 }

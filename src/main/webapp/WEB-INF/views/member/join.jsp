@@ -63,14 +63,14 @@
 						<div id="inputEmailResult"></div>
 					</div>
 				</div>
-				<div class="row mb-3">
+				<!-- <div class="row mb-3">
 					<label for="inputPhone" class="col-sm-2 col-form-label">Phone</label>
 					<div class="col-sm-10">
 						<input type="text" name="phone" class="form-control"
 							id="inputPhone" placeholder="전화번호 입력">
 						<div></div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="row mb-3">
 					<label for="files" class="col-sm-2 col-form-label">Photo</label>

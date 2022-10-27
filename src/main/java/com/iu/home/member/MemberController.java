@@ -94,12 +94,13 @@ public class MemberController
 
 	@RequestMapping(value = "getIdCheck")
 	@ResponseBody
-	public int getIdCheck(String memberVO) throws Exception
+	public int getIdCheck(MemberVO memberVO) throws Exception
 	{
 		log.info("===== Id Check =====");
 
 		int rs = memberService.getCheckId(memberVO);
-		log.info("--- rs: {} ---", rs);
+
+		log.info("=== rs: {} ===", rs);
 
 		return rs;
 	}
