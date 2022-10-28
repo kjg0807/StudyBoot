@@ -1,11 +1,16 @@
 package com.iu.home.board.qna;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +45,7 @@ public class QnaController
 	}
 
 	@GetMapping(value = "write")
-	public String write() throws Exception
+	public String write(@ModelAttribute QnaVO qnaVO) throws Exception
 	{
 		log.info("GET WRITE");
 
@@ -48,15 +53,23 @@ public class QnaController
 	}
 
 	@PostMapping(value = "write")
-	public String write(QnaVO qnaVO, RedirectAttributes redirectAttributes) throws Exception
+	public ModelAndView write(ModelAndView mv, @Valid QnaVO qnaVO, BindingResult bindingResult, RedirectAttributes redirectAttributes)
+			throws Exception
 	{
 		log.info("POST WRITE");
+		if (bindingResult.hasErrors())
+		{
+			log.info("===== qna write error =====");
+			mv.setViewName("qna/write");
+			return mv;
+		}
 
 		int rs = qnaService.setAddList(qnaVO);
 
 		redirectAttributes.addAttribute("rs", rs);
+		mv.setViewName("redirect:./list");
 
-		return "redirect:./list";
+		return mv;
 	}
 
 	@GetMapping(value = "detail")

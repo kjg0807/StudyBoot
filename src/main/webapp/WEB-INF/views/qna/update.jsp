@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <c:import url="../temp/boot.jsp"></c:import>
+<c:import url="../temp/summer.jsp"></c:import>
 <script defer src="/js/update.js"></script>
 <body>
 	<form action="../member/update" method="post" id="frm">
@@ -25,9 +26,9 @@
 				</div>
 				<div class="mb-3">
 					<label for="formGroupExampleInput2" class="form-label">글 내용</label>
-					<textarea name="contents" id="contents" class="form-control" cols="20" rows="5">${list.contents }</textarea>
+					<textarea name="contents" id="contents" class="form-control"></textarea>
 				</div>
-				<div class="mb-3">
+				<div class="mb-3" data-file-size="${list.qnaFileVOs.size() }" id="fileDiv">
 					<c:choose>
 						<c:when test="${dto.fileName == null }">
 							<c:forEach items="${list.qnaFileVOs }" var="dto">
@@ -63,4 +64,12 @@
 		<br>
 	</form>
 </body>
+<script defer>
+	$('#contents').summernote({
+		tabsize : 4,
+		height : 150
+	});
+
+	$('#contents').summernote('code', '${list.contents}')
+</script>
 </html>

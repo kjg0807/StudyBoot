@@ -1,36 +1,53 @@
-let count = 1;
+let count = 0;
+
+flag = true;
 $("#fileAdd").click(function () { // 파일 추가하는 input 태그 생성
     // console.log("나와라")
-    let label = ' <label for="formGroupExampleInput" class="form-label">파일' + count + '</label> ';
+
+    // 저장된 사진 + 추가 할 사진 합 count만큼
+    if (flag) {
+        let size = $("#fileDiv").attr("data-file-size");
+        count = size
+        // console.log(count);
+        flag = false;
+    }
+
+    let zz = parseInt(count) + 1;
+    let label = ' <label for="formGroupExampleInput" class="form-label">파일' + zz + '</label> ';
     let input = ' <input type="file" class="form-control" name="files" id="files"> ';
     $("#File").append(label);
     $("#File").append(input);
     count++;
 
-    if (count > 1) { // 파일 추가 생기면 삭제 버튼 보이기
+    if (count > 0) { // 파일 추가 생기면 삭제 버튼 보이기
         $("#fileDel").show();
     }
 
-    if (count > 6) { // 파일을 5개 이상 추가시
+    if (count > 5) { // 파일을 5개 이상 추가시
         $("#File label:last").remove();
         $("#File input:last").remove();
         swal("파일은 최대 5개까지 가능합니다.", "You clicked the button!", "info");
-        count = 6;
+        count = 5;
         return;
     }
     console.log("add count: " + count);
 })
 
 $("#fileDel").click(function () { // 파일 추가하는 input 태그 삭제
+    if (flag) {
+        let size = $("#fileDiv").attr("data-file-size");
+        count = size
+        // console.log(count);
+        flag = false;
+    }
+
     $("#File label:last").remove();
     $("#File input:last").remove();
     count--;
-    // if(count = 1){
-    //     $("#fileDel").hide();
-    // }
-    if (count < 2) { // 파일 추가하는 input 태그 없을시 삭제 버튼 안보이기
+
+    if (count < 1) { // 파일 추가하는 input 태그 없을시 삭제 버튼 안보이기
         $("#fileDel").hide();
-        count = 1;
+        count = 0;
     }
     console.log("delete count: " + count);
 })
@@ -55,7 +72,7 @@ $("#picDel").click(function () {
                     $("#img1a").remove();
                     $("#picDel").remove();
                 }
-                else{
+                else {
                     swal("삭제를 실패했습니다.", "삭제 실패", "error");
                     rollback();
                 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,26 +12,20 @@
 <body>
 	<section class="container-fluid col-lg-6 mt-5">
 		<h1>Qna Write Page</h1>
-		<form:form modelAttribute="qnaVO" method="post" enctype="multipart/form-data">
-			<%-- <form action="./write" method="post" enctype="multipart/form-data"> --%>
+		<form action="./write" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="formGroupExampleInput2" class="form-label">작성자</label>
-				<form:input path="writer" cssClass="form-control" placeholder="작성자를 입력하세요." />
-				<!-- <input type="text" name="writer" class="form-control" placeholder="작성자를 입력하세요."> -->
-				<form:errors path="writer"></form:errors>
+				<input type="text" name="writer" class="form-control" placeholder="작성자를 입력하세요.">
 			</div>
 			<div class="mb-3">
 				<label for="formGroupExampleInput" class="form-label">제목</label>
-				<form:input path="title" cssClass="form-control" placeholder="제목를 입력하세요." />
-				<!-- <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요."> -->
-				<form:errors path="title"></form:errors>
+				<input type="text" class="form-control" name="title" placeholder="제목을 입력하세요.">
 			</div>
 			<div class="mb-3">
 				<label for="formGroupExampleInput2" class="form-label">글 내용</label>
-				<form:textarea path="contents" cssClass="form-control" placeholder="내용을 입력하세요." />
-				<!-- <textarea name="contents" id="contents" class="form-control" placeholder="내용을 입력하세요."></textarea> -->
-				<form:errors path="contents"></form:errors>
+				<textarea name="contents" id="contents" class="form-control" placeholder="내용을 입력하세요."></textarea>
 			</div>
+
 			<div class="mb-3" id="File">
 				<div class="mb-3">
 					<button type="button" id="fileAdd" class="btn btn-outline-dark">File Add</button>
@@ -41,13 +34,21 @@
 					<br>
 				</div>
 			</div>
+
+			<!-- <div class="mb-3">
+				<label for="formGroupExampleInput" class="form-label">파일1</label>
+				<input type="file" class="form-control" name="files" id="files">
+			</div>
+			<div class="mb-3">
+				<label for="formGroupExampleInput" class="form-label">파일2</label>
+				<input type="file" class="form-control" name="files" id="files1">
+			</div> -->
 			<div style="text-align: center;">
 				<button type="submit" class="btn btn-outline-dark">Write Complete</button>
 				<a href="./list" class="btn btn-outline-dark">list</a>
 				<a href="/" class="btn btn-outline-dark">Home</a>
 			</div>
-			<%-- </form> --%>
-		</form:form>
+		</form>
 	</section>
 </body>
 <script>

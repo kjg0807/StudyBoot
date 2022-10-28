@@ -7,12 +7,12 @@
 		resultMap="loginInfo">
 		select *
 		from member m
-		left join
+		inner join
 		member_role mr
-		on m.id = mr.id
-		left join
+		on (m.id = mr.id)
+		inner join
 		role r
-		on mr.num = r.num
+		on (mr.num = r.num)
 		where m.id=#{id} and m.pwd=#{pwd}
 	</select>
 	<resultMap type="MemberVO" id="loginInfo">
@@ -22,7 +22,7 @@
 		<result column="name" property="name" />
 		<result column="email" property="email" />
 		<result column="enabled" property="enabled" />
-		<collection property="roleVO" javaType="String">
+		<collection property="roleVO" javaType="RoleVO">
 			<id column="num" property="num" />
 			<result column="roleName" property="roleName" />
 		</collection>

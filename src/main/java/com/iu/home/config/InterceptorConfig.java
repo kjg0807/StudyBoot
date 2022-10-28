@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.iu.home.interceptors.StudyInterceptor;
 import com.iu.home.interceptors.TestInterceptor;
@@ -18,6 +19,8 @@ public class InterceptorConfig implements WebMvcConfigurer
 	private TestInterceptor testInterceptor;
 	@Autowired
 	private StudyInterceptor studyInterceptor;
+	@Autowired
+	private LocaleChangeInterceptor changeInterceptor;
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry)
@@ -29,12 +32,11 @@ public class InterceptorConfig implements WebMvcConfigurer
 				.addPathPatterns("/qna/**").addPathPatterns("/notice/**")
 				// 제외할 URL등록
 				.excludePathPatterns("/qna/list");
-		
-		// 추가 Interceeptor 등록
-		registry.addInterceptor(studyInterceptor)
-				.addPathPatterns("/qna/**")
-				.addPathPatterns("/member/**");
 
-		// WebMvcConfigurer.super.addInterceptors(registry);
+		// 추가 Interceeptor 등록
+		registry.addInterceptor(studyInterceptor).addPathPatterns("/qna/**").addPathPatterns("/member/**");
+		
+		// message Interceptor 등록
+		registry.addInterceptor(changeInterceptor).addPathPatterns("/**");
 	}
 }
