@@ -34,11 +34,8 @@
 		values(#{id}, #{pwd}, #{name}, #{email})
 	</insert>
 	
-	<insert id="setRole" parameterType="RoleVO">
-		INSERT INTO MEMBER_ROLE
-		VALUES(#{id},
-		(SELECT * FROM ROLE WHERE num = 3)
-		)
+	<insert id="setMemberRole" parameterType="MemberRoleVO">
+		insert into member_role values(null, 3, #{id})
 	</insert>
 
 	<select id="getCheckId" parameterType="MemberVO"

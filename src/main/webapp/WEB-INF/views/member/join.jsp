@@ -24,7 +24,8 @@
 						<form:input path="id" cssClass="form-control" id="inputId" placeholder="ID 입력" />
 						<!-- <input type="text" name="id" class="form-control" id="inputId" placeholder="ID 입력"> -->
 						<form:errors path="id"></form:errors>
-						<div id="inputIdResult"></div>
+						<div id="inputIdResult">
+						</div>
 						<div>
 							<font id="id_feedback" size="3"></font>
 						</div>
@@ -43,7 +44,7 @@
 				<div class="mb-3">
 					<label for="inputPassword" class="col-form-label">Password Check</label>
 					<div>
-						<form:password path="pwCheck" cssClass="form-control" id="inputPw" placeholder="Password 확인" />
+						<form:password path="pwCheck" cssClass="form-control" id="inputPwCheck" placeholder="Password 확인" />
 						<!-- <input type="password" name="pw" class="form-control" id="inputPwCheck" placeholder="Password 입력"> -->
 						<form:errors path="pwCheck"></form:errors>
 						<div id="inputPwCheckResult"></div>
@@ -55,8 +56,9 @@
 					<div>
 						<form:input path="name" cssClass="form-control" id="inputName" placeholder="이름 입력" />
 						<!-- <input type="text" name="name" class="form-control" id="inputName" placeholder="이름 입력"> -->
-						<form:errors path="name"></form:errors>
-						<div id="inputNameResult"></div>
+						<div id="inputNameResult">
+							<form:errors path="name"></form:errors>
+						</div>
 					</div>
 				</div>
 
@@ -72,7 +74,7 @@
 				<div class="mb-3">
 					<label for="inputEmail" class="col-form-label">Age</label>
 					<div>
-						<form:input path="age" cssClass="form-control" id="inputEmail" placeholder="age 입력" />
+						<form:input path="age" cssClass="form-control" id="inputEmail" placeholder="age 입력" value="24" />
 						<!-- <input type="email" required name="email" class="form-control" id="inputEmail" placeholder="Email 입력"> -->
 						<form:errors path="age"></form:errors>
 						<div id="inputEmailResult"></div>
@@ -82,7 +84,8 @@
 				<div class="mb-3">
 					<label for="inputEmail" class="col-form-label">Birth</label>
 					<div>
-						<form:input path="birth" cssClass="form-control" id="inputEmail" placeholder="birth 입력" />
+						<form:input path="birth" cssClass="form-control" id="inputEmail" placeholder="birth 입력"
+							value="2000-11-11" />
 						<!-- <input type="email" required name="email" class="form-control" id="inputEmail" placeholder="Email 입력"> -->
 						<form:errors path="birth"></form:errors>
 						<div id="inputEmailResult"></div>

@@ -21,8 +21,6 @@ public class MemberVO
 	@NotBlank
 	private String id;
 	@NotBlank
-	@Pattern(regexp = "/^?[0-9]$/")
-	// /^?[0-9]{3,4}-?[0-9]{4}$/
 	@Size(min = 4, max = 12)
 	private String pwd;
 	@NotBlank
