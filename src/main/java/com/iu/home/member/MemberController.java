@@ -35,30 +35,30 @@ public class MemberController
 		return "member/login";
 	}
 
-	@PostMapping(value = "login")
-	public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception
-	{
-		log.info("=== post Login ===");
-		ModelAndView mv = new ModelAndView();
-
-		memberVO = memberService.getLogin(memberVO);
-		session.setAttribute("member", memberVO);
-		memberVO = (MemberVO) session.getAttribute("member");
-
-		String message = "로그인 실패";
-		String url = "../member/login";
-		if (memberVO != null)
-		{ // login succeed
-			message = "로그인 성공";
-			url = "../../";
-		}
-		mv.addObject("dto", memberVO);
-		mv.addObject("message", message);
-		mv.addObject("url", url);
-		mv.setViewName("member/rs");
-
-		return mv;
-	}
+//	@PostMapping(value = "login")
+//	public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception
+//	{
+//		log.info("=== post Login ===");
+//		ModelAndView mv = new ModelAndView();
+//
+//		memberVO = memberService.getLogin(memberVO);
+//		session.setAttribute("member", memberVO);
+//		memberVO = (MemberVO) session.getAttribute("member");
+//
+//		String message = "로그인 실패";
+//		String url = "../member/login";
+//		if (memberVO != null)
+//		{ // login succeed
+//			message = "로그인 성공";
+//			url = "../../";
+//		}
+//		mv.addObject("dto", memberVO);
+//		mv.addObject("message", message);
+//		mv.addObject("url", url);
+//		mv.setViewName("member/rs");
+//
+//		return mv;
+//	}
 
 	@GetMapping(value = "logout")
 	public ModelAndView logout(HttpSession session, MemberVO memberVO) throws Exception
