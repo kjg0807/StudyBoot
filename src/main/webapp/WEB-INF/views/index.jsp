@@ -31,6 +31,7 @@
 		<sec:authorize access="!isAuthenticated()">
 			<!-- is 가 있으면 true false 판별 -->
 			<a href="./member/login" class="btn btn-outline-dark">login</a>
+			<a href="/oauth2/authorization/kakao" class="btn btn-outline-dark">Kakao login</a>
 			<a href="./member/join" class="btn btn-outline-dark">Sign Up</a>
 		</sec:authorize>
 		<!-- 로그인 후 -->

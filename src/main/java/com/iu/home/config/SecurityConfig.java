@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.web.servlet.OAuth2LoginDsl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -16,6 +17,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.iu.home.member.MemberSecurityService;
+import com.iu.home.member.MemberSocialService;
 import com.iu.home.member.security.LoginFail;
 import com.iu.home.member.security.LoginSuccess;
 import com.iu.home.member.security.LogoutCustom;
@@ -36,6 +38,8 @@ public class SecurityConfig
 	private LogoutSuccessCustom logoutSuccessCustom;
 	@Autowired
 	private MemberSecurityService memberSecurityService;
+	@Autowired
+	private MemberSocialService memberSocialService;
 
 	@Bean
 	// public 선언시 default로 바꾸라는 메세지 출력
@@ -110,8 +114,13 @@ public class SecurityConfig
 				.key("rememberMe") // 인증받은 사용자의 정보로 Token을 생성시 필요 *필수 값*
 				.userDetailsService(memberSecurityService) // 인증 절차를 실행할 UserDetailService *필수*
 				// SecurityService의 loadUserByUsername 클래스 필요 - public UserDetails loadUserByUsername
-				.authenticationSuccessHandler(loginSuccess); // 로그인 성공 시 이 Handler 실행
-		// ------------- 로그인 정보 기억 끝 -------------
+				.authenticationSuccessHandler(loginSuccess) // 로그인 성공 시 이 Handler 실행
+				// ------------- 로그인 정보 기억 끝 -------------
+				.and() //
+				// ------------- 소셜 로그인 시작 -------------
+				.oauth2Login() //
+				.userInfoEndpoint() //
+				.userService(memberSocialService) // 소셜 로그인 실행 클래스
 		;
 
 		return httpSecurity.build();

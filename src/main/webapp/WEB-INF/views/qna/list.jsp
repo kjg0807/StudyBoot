@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -46,9 +45,11 @@ a {
 			</table>
 		</div>
 		<div style="text-align: center;">
-			<a href="./write" class="btn btn-outline-dark">Write Page</a> <a
-				href="/" class="btn btn-outline-dark">Home</a>
+			<a href="./write" class="btn btn-outline-dark">Write Page</a>
+			<a href="/" class="btn btn-outline-dark">Home</a>
 		</div>
 	</section>
+	<br>
+	<br>
 </body>
 </html>
