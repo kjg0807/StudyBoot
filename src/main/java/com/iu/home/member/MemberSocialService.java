@@ -16,9 +16,22 @@ public class MemberSocialService extends DefaultOAuth2UserService
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException
 	{
 		log.info("===== Social Login try =====");
-		log.info("userRequest: {}", userRequest);
+		// log.info("userRequest: {}", userRequest);
 		log.info("userRequest AccessToken: {}", userRequest.getAccessToken());
+		log.info("userRequest AdditionalParameters: {}", userRequest.getAdditionalParameters());
+		log.info("userRequest Registration: {}", userRequest.getClientRegistration());
+
+		log.info("===== user infomation =====");
+		OAuth2User oAuth2User = super.loadUser(userRequest);
+		log.info("oauth2user-Name: {}", oAuth2User.getName());
+		log.info("oauth2user-Attr: {}", oAuth2User.getAttributes());
+		log.info("oauth2user-Auth: {}", oAuth2User.getAuthorities());
 
 		return null;
+	}
+
+	private OAuth2User socialJoinCheck()
+	{
+		// 회원가입 유무
 	}
 }
