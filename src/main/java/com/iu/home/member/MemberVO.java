@@ -82,6 +82,7 @@ public class MemberVO implements UserDetails
 		// 사용자 계정의 만료 여부
 		// true: 만료되지 않음, false: 만료 됨, 로그인 불가
 		return true;
+		// return false;
 	}
 
 	@Override
@@ -91,6 +92,7 @@ public class MemberVO implements UserDetails
 		// true: 계정이 잠기지 않음
 		// false: 계정이 잠김, 로그인 불가
 		return true;
+		// return false;
 	}
 
 	@Override
@@ -100,10 +102,17 @@ public class MemberVO implements UserDetails
 		// true: 만료 안됨
 		// false: 만료 됨, 로그인 안됨
 		return true;
+		// return false;
 	}
 
 	// isEnabled
 	// 계정 사용 여부
 	// true: 계정 활성화, 사용 가능
 	// false: 계정 비활성화, 사용 불가능
+
+	public boolean isEnabled()
+	{
+		return true;
+		// return false;
+	}
 }

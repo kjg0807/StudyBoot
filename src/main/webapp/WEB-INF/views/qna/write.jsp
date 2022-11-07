@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,9 @@
 	<section class="container-fluid col-lg-6 mt-5">
 		<h1>Qna Write Page</h1>
 		<form:form modelAttribute="qnaVO" method="post" enctype="multipart/form-data">
+			<!-- SecurityConfig 에서 csrf 주석일 때 사용 -->
+			<sec:csrfInput />
+			
 			<%-- <form action="./write" method="post" enctype="multipart/form-data"> --%>
 			<div class="mb-3">
 				<label for="formGroupExampleInput2" class="form-label">작성자</label>

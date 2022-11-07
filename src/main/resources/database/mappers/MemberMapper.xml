@@ -3,7 +3,7 @@
 
 <mapper namespace="com.iu.home.member.MemberMapper">
 
-	<select id="getLogin" parameterType="MemberVO"
+	<select id="getLogin" parameterType="String"
 		resultMap="loginInfo">
 		select *
 		from member m
@@ -11,21 +11,21 @@
 		member_role mr
 		on (m.id =
 		mr.id)
-		inner join
+		inner
+		join
 		role r
 		on (mr.num = r.num)
-		where m.id=#{id} and
-		m.pwd=#{pwd}
+		where m.id=#{username}
+		<!-- and m.pwd=#{pwd} -->
 	</select>
 	<resultMap type="MemberVO" id="loginInfo">
-		<id column="num" property="num" />
-		<result column="id" property="id" />
+		<id column="id" property="id" />
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
 		<result column="enabled" property="enabled" />
-		<collection property="roleVO" javaType="RoleVO">
-			<id column="num" property="num" />
+		<collection property="roleVOs" javaType="List"
+			ofType="RoleVO">
 			<result column="roleName" property="roleName" />
 		</collection>
 	</resultMap>

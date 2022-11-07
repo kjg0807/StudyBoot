@@ -1,7 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%-- <c:> --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!-- message -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<!-- form:form tag -->
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<!-- security tag -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,27 +27,54 @@
 		<br>
 		<br>
 		<a href="./qna/list" class="btn btn-outline-dark">QNA List</a>
-		<c:choose>
-			<c:when test="${member == null }">
-				<a href="./member/login" class="btn btn-outline-dark">login</a>
-				<a href="./member/join" class="btn btn-outline-dark">Sign Up</a>
-			</c:when>
-			<c:otherwise>
-				<%-- <h3>ID:${member.id } 이름: ${member.name }님안녕하세요!</h3> --%>
-				<h3>
-					<spring:message code="welName" arguments="${member.name }"></spring:message>
-				</h3>
-				<h4>
-					<spring:message code="welID" arguments="${member.id}, ${member.name }" argumentSeparator=","></spring:message>
-				</h4>
-				<h4>등급: ${member.roleVO.roleName }</h4>
-				<a href="./member/logout" class="btn btn-outline-dark">logout</a>
-			</c:otherwise>
-		</c:choose>
+		<!-- 로그인 전 -->
+		<sec:authorize access="!isAuthenticated()">
+			<!-- is 가 있으면 true false 판별 -->
+			<a href="./member/login" class="btn btn-outline-dark">login</a>
+			<a href="./member/join" class="btn btn-outline-dark">Sign Up</a>
+		</sec:authorize>
+		<!-- 로그인 후 -->
+		<sec:authorize access="isAuthenticated()">
+			<%--<h3>
+				<spring:message code="welName" arguments="${member.name }"></spring:message>
+			</h3>
+			<h4>
+				<spring:message code="welID" arguments="${member.id}, ${member.name }" argumentSeparator=","></spring:message>
+			</h4>
+			<h4>등급: ${member.roleVO.roleName }</h4> --%>
+			<br>
+			<br>
+			<h4>
+				<sec:authentication property="name" />
+				님 안녕하세요
+			</h4>
+			<br>
+
+			<!-- access="hasRole('ADMIN')" -->
+			<sec:authorize url="/admin">
+				<a href="/admin" class="btn btn-outline-dark">Admin Page</a>
+			</sec:authorize>
+			<sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
+				<a href="/manager" class="btn btn-outline-dark">Manager Page</a>
+			</sec:authorize>
+
+			<sec:authorize access="hasRole('MEMBER')">
+				<a href="./member/mypage" class="btn btn-outline-dark">MyPage</a>
+			</sec:authorize>
+
+			<form action="/member/logout" method="post">
+				<sec:csrfInput />
+				<br>
+				<button class="btn btn-outline-dark">logout</button>
+			</form>
+			<!-- 로그인 후 -->
+		</sec:authorize>
+
+
 		<br>
 		<br>
-		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG" style="width: 50%; height: 50%;">
-		<img src="/file/notice/복숭아꽃.jpg" style="width: 50%; height: 50%;">
+		<img src="/file/qna/2f8760fc-7064-41a4-bc3a-c3445f875c2d_aa.JPG" style="width: 50%; height: 50%;"> <img
+			src="/file/notice/복숭아꽃.jpg" style="width: 50%; height: 50%;">
 		<br>
 		<br>
 		<a href="/fileDown/qna?fileNum=2" class="btn btn-outline-dark">Qna Download</a>

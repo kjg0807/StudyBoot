@@ -19,14 +19,24 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.home.util.Pager;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping(value = "/qna/*")
+@Slf4j
 public class QnaController
 {
 	@Autowired
 	private QnaService qnaService;
 
-	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	@GetMapping("hack")
+	@ResponseBody
+	public int hack(QnaVO qnaVO) throws Exception
+	{
+		qnaService.setAddList(qnaVO);
+
+		return 1;
+	}
 
 	@GetMapping(value = "list")
 	public ModelAndView list(Pager pager) throws Exception
@@ -53,8 +63,7 @@ public class QnaController
 	}
 
 	@PostMapping(value = "write")
-	public ModelAndView write(ModelAndView mv, @Valid QnaVO qnaVO, BindingResult bindingResult, RedirectAttributes redirectAttributes)
-			throws Exception
+	public ModelAndView write(ModelAndView mv, @Valid QnaVO qnaVO, BindingResult bindingResult, RedirectAttributes redirectAttributes) throws Exception
 	{
 		log.info("POST WRITE");
 		if (bindingResult.hasErrors())

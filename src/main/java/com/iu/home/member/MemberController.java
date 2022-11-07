@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,53 +29,58 @@ public class MemberController
 	private MemberService memberService;
 
 	@GetMapping(value = "login")
-	public String getLogin() throws Exception
+	public void getLogin(@RequestParam(defaultValue = "false", required = false) Boolean error, String message, Model model) throws Exception
 	{
 		log.info("=== get Login ===");
 
-		return "member/login";
+		// Controller에서 받아 jsp로 다시 보내도 됨
+		if (error)
+		{
+			model.addAttribute("msg", "ID 또는 PWD를 확인");
+		}
 	}
 
-//	@PostMapping(value = "login")
-//	public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception
-//	{
-//		log.info("=== post Login ===");
-//		ModelAndView mv = new ModelAndView();
-//
-//		memberVO = memberService.getLogin(memberVO);
-//		session.setAttribute("member", memberVO);
-//		memberVO = (MemberVO) session.getAttribute("member");
-//
-//		String message = "로그인 실패";
-//		String url = "../member/login";
-//		if (memberVO != null)
-//		{ // login succeed
-//			message = "로그인 성공";
-//			url = "../../";
-//		}
-//		mv.addObject("dto", memberVO);
-//		mv.addObject("message", message);
-//		mv.addObject("url", url);
-//		mv.setViewName("member/rs");
-//
-//		return mv;
-//	}
+	// @PostMapping(value = "login")
+	// public ModelAndView getLogin(MemberVO memberVO, HttpSession session) throws Exception
+	// {
+	// log.info("=== post Login ===");
+	// ModelAndView mv = new ModelAndView();
+	//
+	// memberVO = memberService.getLogin(memberVO);
+	// session.setAttribute("member", memberVO);
+	// memberVO = (MemberVO) session.getAttribute("member");
+	//
+	// String message = "로그인 실패";
+	// String url = "../member/login";
+	// if (memberVO != null)
+	// { // login succeed
+	// message = "로그인 성공";
+	// url = "../../";
+	// }
+	// mv.addObject("dto", memberVO);
+	// mv.addObject("message", message);
+	// mv.addObject("url", url);
+	// mv.setViewName("member/rs");
+	//
+	// return mv;
+	// }
 
-	@GetMapping(value = "logout")
-	public ModelAndView logout(HttpSession session, MemberVO memberVO) throws Exception
-	{
-		ModelAndView mv = new ModelAndView();
-		log.info("=== logout ===");
-		session.invalidate();
-		String message = "로그아웃 되었습니다.";
-		String url = "../../";
-
-		mv.addObject("message", message);
-		mv.addObject("url", url);
-		mv.setViewName("member/rs");
-
-		return mv;
-	}
+	// @GetMapping(value = "logout")
+	// public ModelAndView logout(HttpSession session, MemberVO memberVO) throws
+	// Exception
+	// {
+	// ModelAndView mv = new ModelAndView();
+	// log.info("=== logout ===");
+	// session.invalidate();
+	// String message = "로그아웃 되었습니다.";
+	// String url = "../../";
+	//
+	// mv.addObject("message", message);
+	// mv.addObject("url", url);
+	// mv.setViewName("member/rs");
+	//
+	// return mv;
+	// }
 
 	@GetMapping(value = "join")
 	public String setJoin(@ModelAttribute MemberVO memberVO) throws Exception
@@ -141,5 +147,14 @@ public class MemberController
 		log.info("=== rs: {} ===", rs);
 
 		return rs;
+	}
+
+	@GetMapping("mypage")
+	public String getMyPage() throws Exception
+	{
+		log.info("=== GET MyPage ===");
+
+		return "member/mypage";
+
 	}
 }
