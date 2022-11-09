@@ -2,10 +2,14 @@ package com.iu.home.member;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +31,39 @@ public class MemberController
 {
 	@Autowired
 	private MemberService memberService;
+
+	// kakao logoutResult
+	@GetMapping("logoutResult")
+	public String SocialLogout() throws Exception
+	{
+		return "redirect:../";
+	}
+
+	@GetMapping("delete")
+	public ModelAndView setDelete(HttpSession session, String pwd) throws Exception
+	{
+		ModelAndView mv = new ModelAndView();
+		// 1. 로그인 방식 - Social 일반 구분
+		SecurityContextImpl context = (SecurityContextImpl) session.getAttribute("SPRING_SECURITY_CONTEXT");
+		Authentication authentication = context.getAuthentication();
+		log.info("auth: {}", authentication);
+		MemberVO memberVO = (MemberVO) authentication.getPrincipal();
+		log.info("Principal: {}", memberVO);
+		log.info("getSocial: {}", memberVO.getSocial());
+
+		int rs = memberService.setDelete(memberVO);
+
+		if (rs > 0) // 탈퇴 성공 -> 자동 로그아웃
+		{
+			mv.setViewName("redirect:/member/logout");
+		}
+		else
+		{
+			// 탈퇴 실패
+			// response.sendRedirect("/");
+		}
+		return mv;
+	}
 
 	@GetMapping(value = "login")
 	public void getLogin(@RequestParam(defaultValue = "false", required = false) Boolean error, String message, Model model) throws Exception

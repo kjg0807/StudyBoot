@@ -1,14 +1,66 @@
 package com.iu.home.member;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.client.RestTemplate;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class MemberService
 {
 	@Autowired
 	private MemberMapper memberMapper;
+
+	@Value("${kakao.Admin.key}")
+	private String adminKey;
+
+	public int setDelete(MemberVO memberVO) throws Exception
+	{
+		int rs = 0;
+		// 카카오만 됨
+
+		RestTemplate restTemplate = new RestTemplate();
+		HttpHeaders headers = new HttpHeaders();
+		// header 넣기
+		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		// MediaType.APPLICATION_FORM_URLENCODED: application/x-www-form-urlencoded
+		headers.add("Authorization", "KakaoAK " + adminKey);
+
+		// parameter 넣기
+		MultiValueMap<String, String> param = new LinkedMultiValueMap<>();
+		param.add("target_id_type", "user_id"); // user_id 고정
+		param.add("target_id", memberVO.getId());
+
+		// - 요청 객체
+		HttpEntity<MultiValueMap<String, String>> req = new HttpEntity<>(param, headers); // header param 순서 차이?
+
+		// 전송 후 결과 처리
+		// Response의 <> 안 : restTemplate의 형식과 동일하게
+		ResponseEntity<String> res = restTemplate.postForEntity("https://kapi.kakao.com/v1/user/unlink", req, String.class);
+		// 링크, 결과 값, 형식
+
+		// 아이디 찍히면 정상 탈퇴
+		log.info("res: {}", res.getBody());
+		
+		if (res.getBody() != null)
+		{
+			rs = 1;
+		}
+		// 탈퇴되면 1 리턴 안되면 0 리턴
+		return rs;
+	}
 
 	// 로그인 처리는 Security에서
 	// public MemberVO getLogin(MemberVO memberVO) throws Exception

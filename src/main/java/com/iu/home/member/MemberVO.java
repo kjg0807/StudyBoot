@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -16,11 +17,12 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import lombok.Data;
 
 @Data
-public class MemberVO implements UserDetails
+public class MemberVO implements UserDetails, OAuth2User
 {
 	@Null
 	private Long num;
@@ -49,6 +51,21 @@ public class MemberVO implements UserDetails
 	private Date birth;
 
 	private List<RoleVO> roleVOs;
+
+	// ===== Social Login =====
+	// Kakao, naver, google
+	private String social; // 사이트 이름 저장
+
+	// OAuth2User, Token 정보등을 저장하는 Attribute
+	private Map<String, Object> attributes;
+	// getter, setter 만드는 원리: 변수명 첫글자 대문자, 앞에 get or set
+
+	@Override
+	public Map<String, Object> getAttributes()
+	{
+		return this.attributes;
+	}
+	// ---------- OAuth2User, Token ----------
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() // 권한을 받는 것?

@@ -35,20 +35,20 @@
 			<a href="./member/join" class="btn btn-outline-dark">Sign Up</a>
 		</sec:authorize>
 		<!-- 로그인 후 -->
+		<sec:authentication property="Principal" var="member" />
 		<sec:authorize access="isAuthenticated()">
-			<%--<h3>
+			<h3>
 				<spring:message code="welName" arguments="${member.name }"></spring:message>
 			</h3>
 			<h4>
 				<spring:message code="welID" arguments="${member.id}, ${member.name }" argumentSeparator=","></spring:message>
 			</h4>
-			<h4>등급: ${member.roleVO.roleName }</h4> --%>
 			<br>
 			<br>
-			<h4>
+			<%-- <h4>
 				<sec:authentication property="name" />
 				님 안녕하세요
-			</h4>
+			</h4> --%>
 			<br>
 
 			<!-- access="hasRole('ADMIN')" -->
@@ -63,12 +63,16 @@
 				<a href="./member/mypage" class="btn btn-outline-dark">MyPage</a>
 			</sec:authorize>
 
+			<button type="button" id="kakao" class="btn btn-outline-dark">kakao Logout</button>
+
 			<form action="/member/logout" method="post">
 				<sec:csrfInput />
 				<br>
 				<button class="btn btn-outline-dark">logout</button>
 			</form>
 			<!-- 로그인 후 -->
+
+			<a href="/member/delete" class="btn btn-outline-dark">회원 탈퇴</a>
 		</sec:authorize>
 
 
@@ -94,4 +98,11 @@
 	<h1>${h }</h1>
 	<br>
 </body>
+<script type="text/javascript">
+	$("#kakao").click(function() {
+		$.get("https://developers.kakao.com/logout", function() {
+			location.reload();
+		})
+	})
+</script>
 </html>
