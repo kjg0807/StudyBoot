@@ -1,5 +1,9 @@
 package com.iu.home.member;
 
+import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +17,11 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -27,6 +34,32 @@ public class MemberService
 	private String adminKey;
 
 	public int setDelete(MemberVO memberVO) throws Exception
+	{
+		// 1. webclient 생성
+		WebClient webClient = WebClient.builder() //
+				.baseUrl("https://kapi.kakao.com/") //
+				.build() //
+		;
+
+		MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+		map.add("target_id_type", "user_id");
+		map.add("target_id", memberVO.getId());
+
+		// 2. parameter
+		Mono<String> res = webClient.post() //
+				.uri("v1/user/unlink") //
+				.body(BodyInserters.fromFormData(map))//
+				.header("Authorization", "KakaoAK " + adminKey) //
+				.header("Content-Type", " application/x-www-form-urlencoded") //
+				.retrieve() //
+				.bodyToMono(String.class);
+		;
+		log.info("WebClientRs: {}", res.block());
+
+		return 1;
+	}
+
+	public int setDelete2(MemberVO memberVO) throws Exception
 	{
 		int rs = 0;
 		// 카카오만 됨
@@ -53,7 +86,7 @@ public class MemberService
 
 		// 아이디 찍히면 정상 탈퇴
 		log.info("res: {}", res.getBody());
-		
+
 		if (res.getBody() != null)
 		{
 			rs = 1;
